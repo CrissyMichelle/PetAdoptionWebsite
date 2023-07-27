@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}PetAdoptionBaseTemplate{% endblock %}</title>
+</head>
+<body>
+    <h1>Adopt-A-Pet</h1><hr>
+    {% for msg in get_flashed_messages() %}
+        <p>{{ msg }}</p>
+    {% endfor %}<hr>
+    {% block content %}
+    <p>Cute pets that need a home</p>
+    {% endblock %}
+</body>
+</html>

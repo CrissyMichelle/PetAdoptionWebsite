@@ -1,0 +1,43 @@
+<!--Inherits from the base template-->
+{% extends 'base.html' %}
+{% block title %}Pet{{ pet.id }}{% endblock %}
+{% block content %}
+<h2>{{ pet.name }} the {{ pet.species }}</h2>
+<p><i>Feel free to edit the pet photo, pet notes, or availability at this time.</i></p>
+<ul>
+    <li>{{ pet.name }}</li>
+    <li>{{ pet.species }}</li>
+    {% if pet.photo_url %}
+    <img src="{{ pet.photo_url }}"</img>
+    {% endif %}
+    {% if pet.available %}
+    <li><b>Pet is available!</b></li>
+    <li>{% if pet.notes %}
+        {{ pet.notes }}
+        {% else %}
+        No notes for this pet yet
+        {% endif %}
+    </li>
+    {% else %}
+    <li><i>Sorry this pet is unavailable at this time.</i></li>
+    {% endif %}
+</ul>
+<hr>
+<h3>Edit Pet Details</h3>
+<form id="edit-pet-form" method="POST">
+    {{ form.hidden_tag() }}
+    {% for field in form
+        if field.widget.input_type != 'hidden' %}
+        <p>
+            {{ field.label }}
+            {{ field }}
+            {% for error in field.errors %}
+                {{ error }}
+            {% endfor %}
+        </p>
+    {% endfor %}
+    <button type="submit">Submit</button>
+</form>
+<hr>
+<a href="/">Back to Home</a>
+{% endblock %}

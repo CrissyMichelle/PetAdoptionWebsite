@@ -1,0 +1,23 @@
+<!--Inherits from the base template-->
+{% extends 'base.html' %}
+{% block title %}Add Pet{% endblock %}
+{% block content %}
+<h2>Put up a new Pet for Adoption</h2>
+<p><i>Sorry, we are only accepting cats, dogs, or porcupines at this time.</i></p>
+<form id="add-pet-form" method="POST">
+    {{ form.hidden_tag() }}
+    {% for field in form.iterables
+        if field.widget.input_type != 'hidden' %}
+        <p>
+            {{ field.label }}
+            {{ field }}
+            {% for error in field.errors %}
+                {{ error }}
+            {% endfor %}
+        </p>
+    {% endfor %}
+    <p>{{ form.age.label }} {{ form.age }}</p>
+    <p>{{ form.notes.label }} {{ form.notes }}</p>
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}
